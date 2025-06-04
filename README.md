@@ -1,42 +1,43 @@
 <p align="center">
 <img src="https://git.djeex.fr/Djeex/DjeexLab/raw/branch/main/docs/files/img/global/lab.svg" align="center" width="700">
 
-
-[![docu.djeex.fr](https://img.shields.io/badge/Docu·djeex-00b0f0?style=for-the-badge&logoColor=white&logo=materialformkdocs)](https://docu.djeex.fr/) [![](https://dcbadge.limes.pink/api/server/jvhardware)](https://discord.gg/jvhardware) [![Uptime-Kuma](https://stats.djeex.fr/api/badge/23/status?style=for-the-badge)](https://docu.djeex.fr/) 
-
+[![docu.djeex.fr](https://img.shields.io/badge/Docu·djeex-00b0f0?style=for-the-badge&logoColor=white&logo=materialformkdocs)](https://docu.djeex.fr/) 
+[![](https://dcbadge.limes.pink/api/server/jvhardware)](https://discord.gg/jvhardware) 
+[![Uptime-Kuma](https://stats.djeex.fr/api/badge/23/status?style=for-the-badge)](https://docu.djeex.fr/) 
 </p>
 
-# 🔧 De la doc, encore de la doc
+# 🔧 Docs, More Docs
 
-**Docu·djeex** c'est avant tout un projet personnel visant à héberger chez soi le plus de services possibles du quotidien sans passer par des plateformes propriétaires (Google, Apple, Netflix...). Cette doc utilise [Nuxt.js](https://nuxt.com/)
+**Docu·djeex** is first and foremost a personal project aimed at self-hosting as many everyday services as possible — without relying on proprietary platforms (Google, Apple, Netflix, etc.).  
+This documentation site is built using [Nuxt.js](https://nuxt.com/).
 
-Ce repo contient de quoi modifier les pages, ajouter vos changements, et redéployer le site.
+This repository contains everything you need to edit pages, apply your changes, and redeploy the site.
 
 ## Setup
 
-Installer les dépendances
+Install dependencies:
 
 ```bash
 npm install
 ```
 
-## Environnement de dévelopment (port 3000)
+## Development Environment (port 3000)
 
 ```bash
 npm run dev
 ```
 
-## Génération des pages statiques
+## Generate Static Pages
 
 ```bash
 npm run generate
 ```
 
-Les fichiers HTML seront générés dans le dossier .output/public et prêts à être déployés sur n'importe quel hébergement compatible avec un site statique.
+The HTML files will be generated in the `.output/public` folder and are ready to be deployed on any static-compatible hosting.
 
-## Preview build
+## Preview Build
 
-Si vous voulez voir immédiatement le résultat de la génération du site vous pouvez lancer un serveur de preview :
+If you'd like to immediately see the result of your static site build, you can launch a preview server:
 
 ```bash
 npm run preview
