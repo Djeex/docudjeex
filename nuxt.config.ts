@@ -27,6 +27,7 @@ export default defineNuxtConfig({
   },
 
   app: {
+    baseURL: '/fr/',
     head: {
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/img/favicon/favicon.ico' },
