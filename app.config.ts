@@ -29,6 +29,11 @@ export default defineAppConfig({
     image: '/img/social.png',
     socials: {
       github:'',
+      Language: {
+        label: 'En',
+        icon: 'ri:english-input',
+        href: 'https://docu.djeex.fr'
+      },
       Gitea: {
         label: 'Gitea',
         icon: 'cib:gitea',
