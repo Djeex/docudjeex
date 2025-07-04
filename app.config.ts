@@ -32,7 +32,7 @@ export default defineAppConfig({
       Language: {
         label: '🇫🇷',
         icon:'material-symbols:language-french', 
-        href: 'https:/docu.djeex.fr/fr/',
+        href: 'https://docu.djeex.fr/fr/',
       },
       Gitea: {
         label: 'Gitea',
