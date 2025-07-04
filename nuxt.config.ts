@@ -8,7 +8,6 @@ export default defineNuxtConfig({
     fallback:'dark',
   },
   
-
   content: {
     highlight: {
       langs: [
