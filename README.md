@@ -2,7 +2,6 @@
 <img src="https://git.djeex.fr/Djeex/DjeexLab/raw/branch/main/docs/files/img/global/lab.svg" align="center" width="700">
 
 [![docu.djeex.fr](https://img.shields.io/badge/Docu·djeex-00b0f0?style=for-the-badge&logoColor=white&logo=materialformkdocs)](https://docu.djeex.fr/) 
-[![](https://dcbadge.limes.pink/api/server/jvhardware)](https://discord.gg/jvhardware) 
 [![Uptime-Kuma](https://stats.djeex.fr/api/badge/23/status?style=for-the-badge)](https://docu.djeex.fr/) 
 </p>
 
