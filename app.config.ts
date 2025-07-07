@@ -39,11 +39,11 @@ export default defineAppConfig({
         icon: 'cib:gitea',
         href: 'https://git.djeex.fr/Djeex/docudjeex',
       },
-      Discord: {
-        label: 'Discord',
-        icon: 'cbi:discord',
-        href: 'https://discord.gg/jvhardware',
-      },
+      Github: {
+        label: 'Github',
+        icon:'cib:github', 
+        href: 'https://github.com/Djeex',
+      }
     },
     github: {
       baseUrl:'https://git.djeex.fr',
