@@ -1,0 +1,15 @@
+{
+  "name": "docus-docs",
+  "description": "Official documentation for Docus, also used as playground.",
+  "type": "module",
+  "scripts": {
+    "build": "docus build",
+    "dev": "docus dev"
+  },
+  "dependencies": {
+    "@nuxtjs/plausible": "^1.2.0"
+  },
+  "devDependencies": {
+    "docus": "workspace:*"
+  }
+}
