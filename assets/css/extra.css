@@ -49,6 +49,18 @@
     max-width: var(--elements-container-maxWidth);
 }
 
+.has-parent-icon .icon {
+    color: #ADA9A4;
+}
+
+.has-parent-icon.active .icon {
+    color: var(--color-primary-500) !important;
+}
+
+.card:hover{
+    color:#00304a;
+}
+
 p img {
     border-radius:7px;
 }
