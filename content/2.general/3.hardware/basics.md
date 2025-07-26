@@ -71,9 +71,7 @@ Comes as sticks installed on the motherboard. Varies by format and generation (c
 
 The GPU (Graphics Processing Unit) handles graphical, video, and sometimes AI-related processing. In servers, it's useful for media centers (e.g. [Plex](/serveex/media/plex)) and for accelerating AI tasks like facial recognition or photo indexing (e.g. [Immich](/serveex/cloud/immich)).
 
-Choose between:
-- Dedicated GPU with VRAM (via PCIe)
-- iGPU (integrated GPU within the CPU like the N100/N305 series)
+Depending on the required performance, one can choose between a dedicated GPU with its own VRAM (a graphics card connected to a PCIe slot on the motherboard), or an iGPU—an integrated GPU built into the CPU (such as the N100/N150 or N305/N355), which uses the system’s shared RAM.
 
 ### HDD(s)
 ---
@@ -82,7 +80,11 @@ Choose between:
   <img src="/img/global/hdd.svg" alt="Image" style="max-width: 50%; margin-right: 20px;">
 </p>
 
-An HDD (Hard Disk Drive) is a traditional data storage device using spinning platters and read/write heads. Though slower due to its mechanical nature, it offers huge capacity (up to 30TB). It's ideal for media files, cloud storage, and archives—where high speed isn't critical.
+An HDD (Hard Disk Drive), or hard drive, is a component used to store data. It was once the standard storage device in computers. HDDs consist of one or more stacked platters and read/write heads—somewhat like a vinyl record player.
+
+Today, HDDs can store enormous amounts of data (up to 30TB, or 30,000 gigabytes, for consumer models), but their read and write speeds are limited due to their mechanical nature. They are also bulky and heavy.
+
+Generally, HDDs are best suited for storing data that doesn’t require frequent access or fast write speeds, such as media files (videos, photos), cloud drives, or archived data. They perform well in these scenarios and, most importantly, are significantly cheaper than SSDs for the same amount of storage.
 
 ::alert{type="success"}
 :::list{type="success"}
@@ -99,26 +101,25 @@ Comes in 3.5" and 2.5" formats; servers usually favor the more reliable 3.5".
   <img src="/img/global/nvme.svg" alt="Image" style="max-width: 50%; margin-right: 20px;">
 </p>
 
-An SSD (Solid State Drive) stores data on memory chips. Unlike RAM, SSDs retain data without power. They’re small, fast (several GB/s), and reliable with no moving parts.
+An SSD (Solid State Drive) is a small circuit board with memory chips soldered onto it, used to store information. Unlike RAM, these chips retain data even when not powered, meaning the information is preserved after a reboot. SSDs are generally used as the main storage medium for your server.
 
-Preferred format: M.2 NVMe—smallest and fastest, now standard.
+Unlike HDDs, SSDs have no moving parts, are highly compact, and most importantly, are extremely fast—offering speeds of several gigabytes per second for high-performance models.
 
-More expensive than HDDs, but essential for:
-- Operating system
-- Containers like [Docker](/serveex/core/docker)
-- Databases
-- Any fast-access data (apps, websites, etc.)
+SSDs come in various formats, but today the preferred choice is the M.2 NVMe version, as it is the smallest, fastest, and has become the standard on modern motherboards.
+
+However, SSDs are significantly more expensive than hard drives for the same storage capacity. Typically, the operating system (OS) is installed on the SSD to ensure fast performance. In a server environment, it's also ideal to store [Docker containers](/serveex/core/docker) and databases on the SSD. More broadly, any data that needs to be accessed frequently and quickly—such as websites, applications, or processing workloads—should be stored on an SSD.
 
 ### Network Card
 ---
 
-Connects your server to a network (and internet). Has a controller chip and one or more ports, such as:
-- RJ45 Gigabit Ethernet (10/100/1000 Mbps = 125 MB/s)
-- RJ45 2.5G (312.5 MB/s)
-- RJ45 5G (625 MB/s)
-- RJ45 10G Base-T (1.25 GB/s)
-- SFP 1G (fiber, 1 Gbps)
-- SFP+ 10G (fiber, 10 Gbps)
+A network card allows your machine to communicate with your network (including the internet). It consists of a controller chip and one or more network ports. These ports—often Ethernet ports—can come in different physical formats and support various data transfer standards:
+
+- RJ45 Gigabit Ethernet (10/100/1000): The standard RJ45 connector, supporting speeds from 10 Mbps (0.125 MB/s) up to 1000 Mbps (125 MB/s).
+- RJ45 2.5G: Same connector type, supporting up to 2.5 Gbps (2,500 Mbps or 312.5 MB/s).
+- RJ45 5G: Same connector, supporting up to 5 Gbps (625 MB/s).
+- RJ45 10G Base-T: Same RJ45 format, supporting up to 10 Gbps (1.25 GB/s).
+- SFP 1G: SFP port, commonly used for fiber optic connections, supporting speeds up to 1 Gbps.
+- SFP+ 10G: An enhanced version of the SFP port, also used for fiber optics, supporting up to 10 Gbps.
 
 ::alert{type="warning"}
 :::list{type="warning"}
@@ -126,7 +127,9 @@ Connects your server to a network (and internet). Has a controller chip and one 
 :::
 ::
 
-Most motherboards include a built-in NIC. However, add-on network cards (USB or PCIe) can offer redundancy or better performance.
+The network card is usually built directly into the motherboard, but you can also use dedicated network cards, for example via USB or a PCIe expansion slot.
+
+In general, for a server setup, it's recommended to have at least two Ethernet ports to ensure redundancy in case one connection fails.
 
 ### Input/Output Ports
 ---
@@ -142,22 +145,27 @@ Choose a motherboard and expansions based on your I/O needs.
 ### Power Supply
 ---
 
-The power supply delivers electricity to your components. It connects to wall power and uses various connectors for motherboard, drives, GPU, etc.
+The power supply unit (PSU) is the component that provides electrical power to your machine’s components. It connects to the wall via a power cord and has several output cables that plug into the motherboard and various peripherals, such as hard drives or dedicated graphics cards.
 
-Key specs:
-- Wattage (e.g., 500W)
-- Modularity (fixed vs detachable cables)
-- Efficiency (e.g., 80% = 625W drawn for 500W output)
+A power supply is defined by several key characteristics:
 
-Formats vary (ATX L to SFX). Rack server PSUs are flatter and specialized.
+- Wattage (its total power output),
+- Modularity (whether the cables are fixed or detachable),
+- Efficiency (measured as a percentage). For example, a 500W PSU with 80% efficiency will actually draw 625W from the wall to deliver 500W to the system.
 
-Rule of thumb: estimate your system's wattage needs and double it, since optimal PSU efficiency is around 50% load.
+Another important factor is the form factor. There are several standard sizes, from ATX L (for larger cases) to SFX (for compact builds). There are also specialized models for rack-mounted servers, which are typically flat and space-efficient.
+
+To choose the right PSU, a common rule of thumb is to estimate your system’s power needs based on usage, and then double that value. This is because most power supplies operate at optimal efficiency around 50% of their maximum load.
 
 ### Case
 ---
 
 <div style="display: flex; align-items: center;">
   <img src="/img/global/case.svg" alt="Image" style="max-width: 25%; max-height:230px; margin-right: 20px;">
-  <p>The case affects cooling, airflow, and compatibility (motherboard, PSU, GPU). It also determines HDD/SSD support and layout. Rackmount cases fit into server cabinets. Choose your case based on hardware needs and space constraints.</p>
+  <p>The case is also an essential component of your machine. It plays a key role in cooling, through its fans and airflow design, and it determines the form factor compatibility for your motherboard, power supply, and any dedicated GPU you may install.
+</p>
 </div>
 
+Additionally, the case dictates how many HDDs you can install and what formats they support. Some cases are rack-mountable, meaning they can be installed in server racks (server cabinets).
+
+Choose your case carefully based on your specific needs and the hardware you plan to use.
