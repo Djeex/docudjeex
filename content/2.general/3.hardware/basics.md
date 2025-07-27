@@ -15,11 +15,11 @@ main:
 ![hardware](/img/global/hardware.svg)
 
 
-A server is essentially a computer dedicated to specific tasks, designed to remain accessible at all times. Structurally, it's not much different from a regular computer. Depending on its intended use, some components may vary. This article serves as a reference to help you understand the essential components of a server and how their roles adapt based on your needs.
+A __server__ is essentially a computer dedicated to specific tasks, designed to remain accessible at all times. Structurally, it's not much different from a regular computer. Depending on its intended use, some components may vary. This article serves as a reference to help you understand the essential components of a server and how their roles adapt based on your needs.
 
 ## Motherboard
 ---
-The motherboard is the foundation of your machine. It's the component that connects all others together. It enables communication between components and interaction with peripherals (keyboard, mouse, etc.). Choose it based on your I/O (Input/Output) needs like USB ports, network ports, speed, etc., and ensure compatibility with the components you plan to install.
+The __motherboard__ is the foundation of your machine. It's the component that connects all others together. It enables communication between components and interaction with peripherals (keyboard, mouse, etc.). Choose it based on your I/O (Input/Output) needs like USB ports, network ports, speed, etc., and ensure compatibility with the components you plan to install.
 
 Key components connected to the motherboard:
 - CPU
@@ -39,7 +39,7 @@ Larger boards generally offer more ports and features. Pre-built systems might u
 ---
 <div style="display: flex; align-items: center;">
   <img src="/img/global/cpu.svg" alt="Image" style="max-width: 25%; max-height:230px; margin-right: 20px;">
-  <p>The CPU (Central Processing Unit) is the computer's calculator. It processes most software tasks. Modern CPUs have multiple cores, often with virtual threads, to better handle workloads. They need to be cooled using either an active cooler (with a fan) or a passive one (fanless), depending on power consumption (watts). Choose your CPU based on how you plan to use the server.</p>
+  <p>The <strong>CPU</strong> (Central Processing Unit) is the computer's calculator. It processes most software tasks. Modern CPUs have multiple cores, often with virtual threads, to better handle workloads. They need to be cooled using either an active cooler (with a fan) or a passive one (fanless), depending on power consumption (watts). Choose your CPU based on how you plan to use the server.</p>
 </div>
 
 ::alert{type="warning"}
@@ -62,14 +62,14 @@ For low-power home servers or NAS (non-intensive computing), consider Intel N100
   <img src="/img/global/ram.svg" alt="Image" style="max-width: 65%;">
 </p>
 
-RAM (Random Access Memory) is fast, temporary memory used by the CPU (and iGPU if applicable) for quick access during execution. It clears periodically and when the machine powers down. Better RAM = better CPU performance.
+__RAM__ (Random Access Memory) is fast, temporary memory used by the CPU (and iGPU if applicable) for quick access during execution. It clears periodically and when the machine powers down. Better RAM = better CPU performance.
 
 Comes as sticks installed on the motherboard. Varies by format and generation (currently DDR5).
 
 ## GPU
 ---
 
-The GPU (Graphics Processing Unit) handles graphical, video, and sometimes AI-related processing. In servers, it's useful for media centers (e.g. [Plex](/serveex/media/plex)) and for accelerating AI tasks like facial recognition or photo indexing (e.g. [Immich](/serveex/cloud/immich)).
+The __GPU__ (Graphics Processing Unit) handles graphical, video, and sometimes AI-related processing. Its main theoretical use is to display the image on your screen. In servers, it's useful for media centers (e.g. [Plex](/serveex/media/plex)) and for accelerating AI tasks like facial recognition or photo indexing (e.g. [Immich](/serveex/cloud/immich)).
 
 Depending on the required performance, one can choose between a dedicated GPU with its own VRAM (a graphics card connected to a PCIe slot on the motherboard), or an iGPU—an integrated GPU built into the CPU (such as the N100/N150 or N305/N355), which uses the system’s shared RAM.
 
@@ -80,7 +80,7 @@ Depending on the required performance, one can choose between a dedicated GPU wi
   <img src="/img/global/hdd.svg" alt="Image" style="max-width: 50%; margin-right: 20px;">
 </p>
 
-An HDD (Hard Disk Drive), or hard drive, is a component used to store data. It was once the standard storage device in computers. HDDs consist of one or more stacked platters and read/write heads—somewhat like a vinyl record player.
+An __HDD__ (Hard Disk Drive), or hard drive, is a component used to store data. It was once the standard storage device in computers. HDDs consist of one or more stacked platters and read/write heads—somewhat like a vinyl record player.
 
 Today, HDDs can store enormous amounts of data (up to 30TB, or 30,000 gigabytes, for consumer models), but their read and write speeds are limited due to their mechanical nature. They are also bulky and heavy.
 
@@ -101,7 +101,7 @@ Comes in 3.5" and 2.5" formats; servers usually favor the more reliable 3.5".
   <img src="/img/global/nvme.svg" alt="Image" style="max-width: 50%; margin-right: 20px;">
 </p>
 
-An SSD (Solid State Drive) is a small circuit board with memory chips soldered onto it, used to store information. Unlike RAM, these chips retain data even when not powered, meaning the information is preserved after a reboot. SSDs are generally used as the main storage medium for your server.
+An __SSD__ (Solid State Drive) is a small circuit board with memory chips soldered onto it, used to store information. Unlike RAM, these chips retain data even when not powered, meaning the information is preserved after a reboot. SSDs are generally used as the main storage medium for your server.
 
 Unlike HDDs, SSDs have no moving parts, are highly compact, and most importantly, are extremely fast—offering speeds of several gigabytes per second for high-performance models.
 
@@ -112,14 +112,14 @@ However, SSDs are significantly more expensive than hard drives for the same sto
 ### Network Card
 ---
 
-A network card allows your machine to communicate with your network (including the internet). It consists of a controller chip and one or more network ports. These ports—often Ethernet ports—can come in different physical formats and support various data transfer standards:
+A __network card__ allows your machine to communicate with your network (including the internet). It consists of a controller chip and one or more network ports. These ports—often Ethernet ports—can come in different physical formats and support various data transfer standards:
 
-- RJ45 Gigabit Ethernet (10/100/1000): The standard RJ45 connector, supporting speeds from 10 Mbps (0.125 MB/s) up to 1000 Mbps (125 MB/s).
-- RJ45 2.5G: Same connector type, supporting up to 2.5 Gbps (2,500 Mbps or 312.5 MB/s).
-- RJ45 5G: Same connector, supporting up to 5 Gbps (625 MB/s).
-- RJ45 10G Base-T: Same RJ45 format, supporting up to 10 Gbps (1.25 GB/s).
-- SFP 1G: SFP port, commonly used for fiber optic connections, supporting speeds up to 1 Gbps.
-- SFP+ 10G: An enhanced version of the SFP port, also used for fiber optics, supporting up to 10 Gbps.
+- __RJ45 Gigabit Ethernet (10/100/1000):__ The standard RJ45 connector, supporting speeds from 10 Mbps (0.125 MB/s) up to 1000 Mbps (125 MB/s).
+- __RJ45 2.5G:__ Same connector type, supporting up to 2.5 Gbps (2,500 Mbps or 312.5 MB/s).
+- __RJ45 5G:__ Same connector, supporting up to 5 Gbps (625 MB/s).
+- __RJ45 10G Base-T:__ Same RJ45 format, supporting up to 10 Gbps (1.25 GB/s).
+- __SFP 1G:__ SFP port, commonly used for fiber optic connections, supporting speeds up to 1 Gbps.
+- __SFP+ 10G:__ An enhanced version of the SFP port, also used for fiber optics, supporting up to 10 Gbps.
 
 ::alert{type="warning"}
 :::list{type="warning"}
@@ -134,7 +134,7 @@ In general, for a server setup, it's recommended to have at least two Ethernet p
 ### Input/Output Ports
 ---
 
-I/O ports allow communication with external devices (displays, keyboard, mouse, network...). Motherboards typically offer:
+__I/O__ ports allow communication with external devices (displays, keyboard, mouse, network...). Motherboards typically offer:
 - Ethernet ports
 - USB ports (varied types/speeds)
 - Video ports
@@ -145,7 +145,7 @@ Choose a motherboard and expansions based on your I/O needs.
 ### Power Supply
 ---
 
-The power supply unit (PSU) is the component that provides electrical power to your machine’s components. It connects to the wall via a power cord and has several output cables that plug into the motherboard and various peripherals, such as hard drives or dedicated graphics cards.
+The __power supply unit__ (PSU) is the component that provides electrical power to your machine’s components. It connects to the wall via a power cord and has several output cables that plug into the motherboard and various peripherals, such as hard drives or dedicated graphics cards.
 
 A power supply is defined by several key characteristics:
 
@@ -162,7 +162,7 @@ To choose the right PSU, a common rule of thumb is to estimate your system’s p
 
 <div style="display: flex; align-items: center;">
   <img src="/img/global/case.svg" alt="Image" style="max-width: 25%; max-height:230px; margin-right: 20px;">
-  <p>The case is also an essential component of your machine. It plays a key role in cooling, through its fans and airflow design, and it determines the form factor compatibility for your motherboard, power supply, and any dedicated GPU you may install.
+  <p>The <strong>case</strong> is also an essential component of your machine. It plays a key role in cooling, through its fans and airflow design, and it determines the form factor compatibility for your motherboard, power supply, and any dedicated GPU you may install.
 </p>
 </div>
 
