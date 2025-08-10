@@ -16,19 +16,19 @@ Ce repo contient de quoi modifier les pages, ajouter vos changements, et redépl
 
 Installer les dépendances
 
-```bash
+```sh
 npm install
 ```
 
 ## Environnement de dévelopment (port 3000)
 
-```bash
+```sh
 npm run dev
 ```
 
 ## Génération des pages statiques
 
-```bash
+```sh
 npm run generate
 ```
 
@@ -38,6 +38,6 @@ Les fichiers HTML seront générés dans le dossier .output/public et prêts à 
 
 Si vous voulez voir immédiatement le résultat de la génération du site vous pouvez lancer un serveur de preview :
 
-```bash
+```sh
 npm run preview
 ```
