@@ -69,3 +69,19 @@ p img {
         padding-bottom: 80px !important;
     }
 }
+
+.prose-code.highlight-sh code .line {
+    padding-inline-start: 0 !important;
+}
+
+.prose-code.highlight-sh code .line:before {
+    display:none !important;
+}
+
+.prose-code.highlight-bash code .line {
+    padding-inline-start: 0 !important;
+}
+
+.prose-code.highlight-bash code .line:before {
+    display:none !important;
+}

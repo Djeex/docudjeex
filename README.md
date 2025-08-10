@@ -16,19 +16,19 @@ This repository contains everything you need to edit pages, apply your changes, 
 
 Install dependencies:
 
-```bash
+```sh
 npm install
 ```
 
 ## Development Environment (port 3000)
 
-```bash
+```sh
 npm run dev
 ```
 
 ## Generate Static Pages
 
-```bash
+```sh
 npm run generate
 ```
 
@@ -38,6 +38,6 @@ The HTML files will be generated in the `.output/public` folder and are ready to
 
 If you'd like to immediately see the result of your static site build, you can launch a preview server:
 
-```bash
+```sh
 npm run preview
 ```
