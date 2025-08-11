@@ -24,7 +24,7 @@ export default defineAppConfig({
   
   docus: {
     title: 'Docudjeex',
-    description: 'La doc de mes expériences',
+    description: 'Homelab documentation',
     url: 'http://docus.dev',
     image: '/img/social.png',
     socials: {
