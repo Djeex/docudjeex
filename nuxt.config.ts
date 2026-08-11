@@ -2,6 +2,7 @@ export default defineNuxtConfig({
   // https://github.com/nuxt-themes/docus
   css: ['~/assets/css/extra.css'],
   extends: ['@nuxt-themes/docus'],
+  modules: ['@nuxtjs/sitemap'],
   devtools: { enabled: false },
   colorMode: { 
     preference: 'dark',
@@ -40,6 +41,15 @@ export default defineNuxtConfig({
         { name: 'darkreader-lock' },
       ]
     }
+  },
+
+  site: {
+    url: 'https://docu.djeex.fr'
+  },
+
+  sitemap: {
+    autoLastmod: true,
+    urls: ['https://docu.djeex.fr']
   },
 
   compatibilityDate: '2024-10-24'
