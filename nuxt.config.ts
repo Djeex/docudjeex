@@ -38,7 +38,7 @@ export default defineNuxtConfig({
         { rel: 'manifest', href: '/img/favicon/site.webmanifest' }
       ],
       meta: [
-        { name: 'darkreader-lock' },
+        { name: 'darkreader-lock', content: 'true' },
       ]
     }
   },
