@@ -25,7 +25,7 @@ export default defineAppConfig({
   docus: {
     title: 'Docudjeex',
     description: 'La doc de mes expériences',
-    url: 'http://docus.dev',
+    url: 'https://docu.djeex.fr/fr',
     image: '/img/social.png',
     socials: {
       github:'',
