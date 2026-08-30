@@ -37,6 +37,40 @@ export default defineAppConfig({
           header: 'bg-[#121110] border-[#201e1b]',
         },
       },
+      // Exact colors measured on the old site's ::alert boxes (note=info,
+      // tip=success, warning=warning, caution=danger/error).
+      callout: {
+        compoundVariants: [
+          {
+            color: 'info',
+            class: {
+              base: 'border-[#002235] bg-[#00131D] text-[#64C7FF]',
+              icon: 'text-[#64C7FF]',
+            },
+          },
+          {
+            color: 'success',
+            class: {
+              base: 'border-[#002817] bg-[#00190F] text-[#3CEEA5]',
+              icon: 'text-[#3CEEA5]',
+            },
+          },
+          {
+            color: 'warning',
+            class: {
+              base: 'border-[#292100] bg-[#1B1500] text-[#FFDC4E]',
+              icon: 'text-[#FFDC4E]',
+            },
+          },
+          {
+            color: 'error',
+            class: {
+              base: 'border-[#340A01] bg-[#1C0301] text-[#FFA692]',
+              icon: 'text-[#FFA692]',
+            },
+          },
+        ],
+      },
     },
     header: {
       slots: {
