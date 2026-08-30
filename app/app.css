@@ -1,0 +1,28 @@
+/* Restore the old site's near-black dark background (#0B0A0A) instead of
+   Nuxt UI's default zinc-900 */
+.dark {
+  --ui-bg: #0B0A0A;
+  /* Same border color used on cards, applied sitewide (header, separators,
+     the horizontal nav menu row, etc.) for a consistent look */
+  --ui-border: #121110;
+}
+
+/* Old site's container was 1280px with 24px padding each side (1232px of
+   actual content). Nuxt UI's container uses a bigger lg:px-8 (32px) padding,
+   so the max-width is bumped to 81rem (1296px) to land on the same 1232px
+   content width rather than reproducing the outer 1280px figure verbatim. */
+:root {
+  --ui-container: 81rem;
+}
+
+/* Docus hardcodes --ui-header-height to 112px (64px header + 48px sub-nav
+   bar) whenever navigation.sub is 'header', regardless of what's actually
+   in that bar. Our horizontal menu now lives in the main header row itself
+   (AppHeaderCenter.vue) and the sub-nav bar (AppHeaderBottom.vue) is empty,
+   so the header is back to a single 64px row. */
+@media (min-width: 1024px) {
+  .docus-sub-header {
+    --ui-header-height: 4rem !important;
+  }
+}
+

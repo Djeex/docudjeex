@@ -1,0 +1,55 @@
+"""Old content/ path -> new content/en/ path mapping.
+
+Unlike the Zensical port, Docus v4 keeps the same numeric-prefix
+auto-navigation convention as the old site, so paths are reused almost
+verbatim (just rooted under content/en/, and index.md must sit exactly at
+the locale root per Docus v4's content.config.ts landing-page convention).
+"""
+
+MAPPING = [
+    ("0.index.md", "index.md"),
+    ("1.about/1.welcome.md", "1.about/1.welcome.md"),
+    ("2.general/1.networking/1.nat.md", "2.general/1.networking/1.nat.md"),
+    ("2.general/1.networking/2.dns.md", "2.general/1.networking/2.dns.md"),
+    ("2.general/1.networking/3.samba.md", "2.general/1.networking/3.samba.md"),
+    ("2.general/2.storage/1.raid.md", "2.general/2.storage/1.raid.md"),
+    ("2.general/2.storage/2.zfs.md", "2.general/2.storage/2.zfs.md"),
+    ("2.general/3.hardware/1.basics.md", "2.general/3.hardware/1.basics.md"),
+    ("2.general/3.hardware/2.network.md", "2.general/3.hardware/2.network.md"),
+    ("2.general/3.hardware/3.prolonas.md", "2.general/3.hardware/3.prolonas.md"),
+    ("3.serveex/1.introduction.md", "3.serveex/1.introduction.md"),
+    ("3.serveex/2.core/1.installation.md", "3.serveex/2.core/1.installation.md"),
+    ("3.serveex/2.core/2.docker.md", "3.serveex/2.core/2.docker.md"),
+    ("3.serveex/2.core/3.swag.md", "3.serveex/2.core/3.swag.md"),
+    ("3.serveex/3.security/1.wireguard.md", "3.serveex/3.security/1.wireguard.md"),
+    ("3.serveex/3.security/2.authentik.md", "3.serveex/3.security/2.authentik.md"),
+    ("3.serveex/3.security/3.cloudflare.md", "3.serveex/3.security/3.cloudflare.md"),
+    ("3.serveex/4.monitoring/1.uptime-kuma.md", "3.serveex/4.monitoring/1.uptime-kuma.md"),
+    ("3.serveex/4.monitoring/2.dozzle.md", "3.serveex/4.monitoring/2.dozzle.md"),
+    ("3.serveex/4.monitoring/3.speedtest-tracker.md", "3.serveex/4.monitoring/3.speedtest-tracker.md"),
+    ("3.serveex/4.monitoring/4.beszel.md", "3.serveex/4.monitoring/4.beszel.md"),
+    ("3.serveex/4.monitoring/5.upsnap.md", "3.serveex/4.monitoring/5.upsnap.md"),
+    ("3.serveex/5.media/1.plex.md", "3.serveex/5.media/1.plex.md"),
+    ("3.serveex/5.media/2.qbittorrent.md", "3.serveex/5.media/2.qbittorrent.md"),
+    ("3.serveex/5.media/3.servarr.md", "3.serveex/5.media/3.servarr.md"),
+    ("3.serveex/6.cloud/1.immich.md", "3.serveex/6.cloud/1.immich.md"),
+    ("3.serveex/6.cloud/2.nextcloud.md", "3.serveex/6.cloud/2.nextcloud.md"),
+    ("3.serveex/7.files/1.file-browser.md", "3.serveex/7.files/1.file-browser.md"),
+    ("3.serveex/7.files/2.pingvin.md", "3.serveex/7.files/2.pingvin.md"),
+    ("3.serveex/8.development/1.code-server.md", "3.serveex/8.development/1.code-server.md"),
+    ("3.serveex/8.development/2.gitea.md", "3.serveex/8.development/2.gitea.md"),
+    ("3.serveex/8.development/3.it-tools.md", "3.serveex/8.development/3.it-tools.md"),
+    ("3.serveex/9.apps/1.adguard.md", "3.serveex/9.apps/1.adguard.md"),
+    ("3.serveex/9.apps/2.vaultwarden.md", "3.serveex/9.apps/2.vaultwarden.md"),
+    ("4.stockeex/1.introduction.md", "4.stockeex/1.introduction.md"),
+    ("5.nonsense/1.python/1.nvidia-stock-bot.md", "5.nonsense/1.python/1.nvidia-stock-bot.md"),
+    ("5.nonsense/1.python/2. adguard-cidre.md", "5.nonsense/1.python/2.adguard-cidre.md"),
+    ("5.nonsense/1.python/3.lumeex.md", "5.nonsense/1.python/3.lumeex.md"),
+    ("5.nonsense/1.python/4.instameex.md", "5.nonsense/1.python/4.instameex.md"),
+    ("5.nonsense/2.bash/1.servarr-duplicates.md", "5.nonsense/2.bash/1.servarr-duplicates.md"),
+    ("5.nonsense/2.bash/2.luks- backup.md", "5.nonsense/2.bash/2.luks-backup.md"),
+    ("5.nonsense/2.bash/3.socat-proxy.md", "5.nonsense/2.bash/3.socat-proxy.md"),
+    ("5.nonsense/2.bash/4.hotdisk.md", "5.nonsense/2.bash/4.hotdisk.md"),
+    ("5.nonsense/2.bash/5.backrest-docker-stop.md", "5.nonsense/2.bash/5.backrest-docker-stop.md"),
+    ("Recycled/1.deprecated/1.wireguard-14.md", "6.recycled/1.deprecated/1.wireguard-14.md"),
+]

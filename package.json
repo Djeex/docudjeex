@@ -1,0 +1,12 @@
+{
+  "name": "docus-starter",
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "NUXT_SITE_URL=https://docu.djeex.fr nuxt build"
+  },
+  "dependencies": {
+    "docus": "latest",
+    "better-sqlite3": "^12.11.1",
+    "nuxt": "^4.4.8"
+  }
+}
