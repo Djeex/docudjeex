@@ -17,9 +17,9 @@ const navMenuVariants = useUIConfig('navigationMenu')
            grid for the article body (right TOC sidebar = col-span-2 of that
            inner grid). Matching both levels is what lines this menu up with
            the real content column instead of a naive single-level fraction. -->
-      <div class="grid grid-cols-10 gap-10 w-full pointer-events-auto">
+      <div class="grid grid-cols-10 gap-10 w-full">
         <div class="col-span-8 col-start-3 grid grid-cols-10 gap-10">
-          <div class="col-span-8 col-start-1">
+          <div class="col-span-8 col-start-1 pointer-events-auto">
             <UNavigationMenu
               :items="sections"
               :highlight="navMenuVariants.highlight ?? true"

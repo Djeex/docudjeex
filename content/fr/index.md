@@ -53,7 +53,7 @@ class: my-0!
 ui:
   icon: text-[#1ad6ff]
 ---
-Consultez mes bêtises
+Jetez un oeil à mes âneries
 :::::
 
 :::::card
@@ -64,7 +64,7 @@ to: https://lumeex.djeex.fr
 target: _blank
 class: my-0!
 ---
-Un autre générateur de galerie photo statique, minimaliste et léger
+Un générateur de galerie photo statique, minimaliste et léger
 :::::
 
 :::::card
