@@ -35,6 +35,7 @@ const createDocsSchema = () => z.object({
   hideHeader: z.boolean().optional(),
   hideCopyPage: z.boolean().optional(),
   hideToc: z.boolean().optional(),
+  contributors: z.array(z.string()).optional(),
 })
 
 let collections: Record<string, DefinedCollection>

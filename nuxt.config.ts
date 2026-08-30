@@ -1,7 +1,26 @@
 import { fileURLToPath } from 'node:url'
+import { execFileSync } from 'node:child_process'
 import { createResolver } from '@nuxt/kit'
 
 const { resolve } = createResolver(import.meta.url)
+
+// Contributors per page: read straight from git history rather than an
+// API, so it needs no token and no network call, but the CI checkout must
+// fetch full history (not a shallow clone) or every file will only show
+// its most recent author.
+function getContributors(absoluteFilePath: string): string[] {
+  try {
+    const output = execFileSync(
+      'git',
+      ['log', '--format=%an', '--follow', '--', absoluteFilePath],
+      { cwd: resolve('.'), encoding: 'utf8' },
+    )
+    return [...new Set(output.split('\n').map(line => line.trim()).filter(Boolean))]
+  }
+  catch {
+    return []
+  }
+}
 
 // @nuxt/image resolves its file-storage root differently in `nuxi dev`
 // (needs an absolute path) vs a production build (needs the plain
@@ -59,6 +78,12 @@ export default defineNuxtConfig({
       code: 'fr',
       name: 'Français',
     }],
+  },
+  hooks: {
+    'content:file:afterParse': (ctx: { file: { path?: string }, content: Record<string, unknown> }) => {
+      if (!ctx.file.path?.endsWith('.md')) return
+      ctx.content.contributors = getContributors(ctx.file.path)
+    },
   },
   // Permanent (301) redirects from the old site's French URLs (root-level,
   // no locale prefix) to their new /fr/... equivalents, so bookmarks and

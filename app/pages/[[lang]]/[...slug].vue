@@ -82,6 +82,23 @@ const editLink = computed(() => {
   ].filter(Boolean).join('/')
 })
 
+const contributors = computed(() => (page.value as unknown as Record<string, unknown>)?.contributors as string[] | undefined)
+
+const historyLink = computed(() => {
+  if (!giteaUrl.value) {
+    return
+  }
+
+  return [
+    giteaUrl.value,
+    'commits',
+    'branch',
+    'main',
+    'content',
+    `${page.value?.stem}.${page.value?.extension}`,
+  ].filter(Boolean).join('/')
+})
+
 // Add the page path to the prerender list
 addPrerenderPath(`/raw${route.path}.md`)
 </script>
@@ -149,6 +166,25 @@ addPrerenderPath(`/raw${route.path}.md`)
           </template>
         </div>
       </USeparator>
+      <div
+        v-if="contributors?.length"
+        class="flex items-center gap-2 text-sm text-muted"
+      >
+        <UIcon
+          name="i-lucide-users"
+          class="size-4 shrink-0"
+        />
+        <span>{{ locale === 'fr' ? (contributors.length > 1 ? 'Contributeurs' : 'Contributeur') : (contributors.length > 1 ? 'Contributors' : 'Contributor') }}:</span>
+        <ULink
+          v-if="historyLink"
+          :to="historyLink"
+          target="_blank"
+          class="text-highlighted hover:underline"
+        >
+          {{ contributors.join(', ') }}
+        </ULink>
+        <span v-else>{{ contributors.join(', ') }}</span>
+      </div>
       <UContentSurround :surround="surround" />
     </UPageBody>
 
