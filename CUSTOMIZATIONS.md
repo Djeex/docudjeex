@@ -56,6 +56,6 @@ This catch-all page isn't a docus override (docus doesn't ship one to override �
 - `hideHeader` / `hideCopyPage` / `hideToc` — read the three frontmatter toggles declared in `content.config.ts` above and conditionally skip rendering each block.
 - **Contributors + history block.** Below the "Edit this page" / "Report an issue" links, renders "Contributor(s): <names>" from the `contributors` frontmatter field (populated by the git-log hook), with the names linking to that specific file's Gitea commit history. The goal is to give credit to everyone who's worked on a page — not just whoever last edited it — and let a reader jump straight to the full history of a page without leaving the site or knowing the underlying file path.
 
-## Other repo-root additions
+## License
 
-- `scripts/mapping-en.py`, `scripts/convert-content.py` — one-off scripts written for the original migration of this site's content onto this stack (mapping old slugs/frontmatter to the new structure, and converting MDC syntax). Kept as a reference for how that migration was done rather than deleted, but they're not part of the running app and aren't invoked by any build step.
+MIT (see `LICENSE`), same as the Docus theme this project is built on.
