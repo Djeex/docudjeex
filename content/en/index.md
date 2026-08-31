@@ -1,6 +1,6 @@
 ---
 title: Home
-description: Homelab documentation by Djeex — self-hosting guides for Debian, Docker, networking, storage, and more.
+description: Homelab documentation by Djeex, self-hosting guides for Debian, Docker, networking, storage, and more.
 ---
 
 :ellipsis{right=0px width=75% blur=150px zIndex=60}
