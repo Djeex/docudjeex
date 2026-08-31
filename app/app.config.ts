@@ -31,6 +31,12 @@ export default defineAppConfig({
           base: 'bg-[rgba(12,13,12,0.8)] border-[#121110]',
         },
       },
+      // Custom code-block header icons, keyed by lowercase `[label]` text
+      // (see ```text [Arborescence] / ```text [Directory tree] blocks).
+      codeIcon: {
+        'arborescence': 'i-lucide-folder-tree',
+        'directory tree': 'i-lucide-folder-tree',
+      },
       pre: {
         slots: {
           base: 'bg-[#121110] border-[#201e1b] rounded-lg',
