@@ -31,11 +31,14 @@ export default defineAppConfig({
           base: 'bg-[rgba(12,13,12,0.8)] border-[#121110]',
         },
       },
-      // Custom code-block header icons, keyed by lowercase `[label]` text
-      // (see ```text [Arborescence] / ```text [Directory tree] blocks).
+      // Custom code-block header icons. Full labels (```text [Arborescence])
+      // match by exact lowercase filename; bare extensions (no filename
+      // match) fall back to matching any ```lang [*.ext] label.
       codeIcon: {
         'arborescence': 'i-lucide-folder-tree',
         'directory tree': 'i-lucide-folder-tree',
+        'ini': 'i-lucide-settings',
+        'conf': 'i-lucide-settings',
       },
       pre: {
         slots: {
