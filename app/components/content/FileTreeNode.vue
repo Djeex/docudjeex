@@ -7,9 +7,11 @@ const props = withDefaults(defineProps<{
   entry: FileTreeEntry
   root?: boolean
   parentPath?: string
+  isLast?: boolean
 }>(), {
   root: false,
   parentPath: '',
+  isLast: false,
 })
 
 // Splits a trailing " # comment" off a raw label (space-prefixed, like a
@@ -73,14 +75,46 @@ const icon = computed(() => {
 
 <template>
   <li class="relative" :class="root ? '' : 'ps-3'">
+    <!-- Not the last child: a plain full-height guide line, since it needs
+         to keep going for the next sibling below it anyway. This is a direct
+         child of the LI (not the row span below, like the other guides),
+         so its own "start-0" lines up with the row span's "-start-1.5":
+         the row span sits 1.5 further in (its "-mx-1.5), so its own offset
+         needs those same 1.5 taken back out to land on the same column. -->
+    <span v-if="!root && !isLast" class="absolute start-0 top-0 bottom-0 w-px bg-white/20" />
     <span
       class="group flex items-center gap-1.5 py-1 px-1.5 -mx-1.5 rounded-md relative hover:bg-elevated/50 transition-colors cursor-pointer"
       title="Copy path"
       @click="onClick"
     >
+      <!-- Last child: one rounded corner (border-inline-start + border-block-end
+           on a single box) instead of a separate vertical + horizontal stroke,
+           so the join is one clean curve rather than two translucent strokes
+           stacking into a visibly brighter square where they cross. Sized off
+           this row's own box (top to its vertical center) instead of a guessed
+           pixel height, so it stays in sync if the row's height ever changes. -->
       <span
-        v-if="!root"
-        class="absolute -start-1.5 top-1/2 -translate-y-1/2 w-3 h-px bg-white/20"
+        v-if="!root && isLast"
+        class="absolute -start-1.5 top-0 bottom-1/2 w-3 border-s border-b border-white/20 rounded-es-md"
+      />
+      <!-- Not the last child: just the branch into the icon — the vertical
+           guide itself is the LI-level line above, offset a hair to the
+           right of it so the two strokes sit side by side instead of
+           overlapping. -->
+      <span
+        v-if="!root && !isLast"
+        class="absolute -start-[5px] top-1/2 -translate-y-1/2 w-3 h-px bg-white/20"
+      />
+      <!-- Bridges the gap between this icon's own bottom edge and where its
+           children's guide lines start (right at this row's bottom edge,
+           which is exactly where the child <ul> begins), so the line reads
+           as coming out of the folder icon rather than piercing through it
+           or starting in mid-air. Starts at the row's center plus half the
+           icon's own height (size-4 = 16px), so it clears the icon glyph
+           regardless of the row's actual height. -->
+      <span
+        v-if="isFolder && children.length"
+        class="absolute start-3.5 top-[calc(50%+8px)] bottom-0 w-px bg-white/20"
       />
       <UIcon
         :name="icon"
@@ -94,8 +128,14 @@ const icon = computed(() => {
         class="size-3.5 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity text-muted"
       />
     </span>
-    <ul v-if="children.length" class="ms-2 ps-0 list-none border-s border-white/20">
-      <FileTreeNode v-for="(child, i) in children" :key="i" :entry="child" :parent-path="fullPath" />
+    <ul v-if="children.length" class="ms-2 ps-0 list-none">
+      <FileTreeNode
+        v-for="(child, i) in children"
+        :key="i"
+        :entry="child"
+        :parent-path="fullPath"
+        :is-last="i === children.length - 1"
+      />
     </ul>
   </li>
 </template>
