@@ -34,6 +34,13 @@ export default defineNuxtConfig({
   site: {
     url: 'https://docu.djeex.fr',
     name: 'Docudjeex',
+    // The build produces a static site (Nitro's default `autoSubfolderIndex`
+    // writes every route as `path/index.html`), so canonical/og:url/sitemap
+    // must carry the trailing slash too, matching what's actually on disk.
+    // Without this, canonical points to the no-slash URL while the static
+    // host's directory redirect sends visitors (and crawlers) to the slash
+    // version, creating a redirect loop that keeps pages out of the index.
+    trailingSlash: true,
   },
   app: {
     head: {
@@ -66,6 +73,17 @@ export default defineNuxtConfig({
           },
           langs: ['nginx', 'properties', 'php', 'toml', 'console', 'sh', 'yaml'],
         },
+      },
+    },
+  },
+  // Keeps <NuxtLink> hrefs (including the ones i18n's switchLocalePath
+  // builds for hreflang) consistent with the trailing-slash URLs enforced
+  // by app/middleware/trailing-slash.global.ts, so internal navigation
+  // never triggers that redirect either.
+  experimental: {
+    defaults: {
+      nuxtLink: {
+        trailingSlash: 'append',
       },
     },
   },
