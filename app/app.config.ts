@@ -20,6 +20,31 @@ export default defineAppConfig({
   github: {
     url: 'https://github.com/Djeex/docudjeex',
   },
+  toc: {
+    bottom: {
+      title: 'Other dumb things',
+      links: [
+        {
+          icon: 'i-cib-gitea',
+          label: 'git.djeex.fr',
+          to: 'https://git.djeex.fr',
+          target: '_blank',
+        },
+        {
+          icon: 'i-brand-lumeex',
+          label: 'Lumeex',
+          to: 'https://lumeex.djeex.fr',
+          target: '_blank',
+        },
+        {
+          icon: 'i-brand-instameex',
+          label: 'Instameex',
+          to: 'https://instameex.djeex.fr',
+          target: '_blank',
+        },
+      ],
+    },
+  },
   ui: {
     colors: {
       primary: 'cyan',
