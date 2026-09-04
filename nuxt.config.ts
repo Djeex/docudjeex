@@ -76,10 +76,23 @@ export default defineNuxtConfig({
       },
     },
   },
-  // Keeps <NuxtLink> hrefs (including the ones i18n's switchLocalePath
-  // builds for hreflang) consistent with the trailing-slash URLs enforced
-  // by app/middleware/trailing-slash.global.ts, so internal navigation
-  // never triggers that redirect either.
+  nitro: {
+    prerender: {
+      // Docus sets this to `false`, which writes every route as `path.html`.
+      // That contradicts `site.trailingSlash` above (canonical/og:url/sitemap
+      // all end in `/`) and the production host, which 301-redirects a bare
+      // path to its slash form. Back to `path/index.html` so what's on disk
+      // matches the URLs we advertise.
+      autoSubfolderIndex: true,
+      // Docus only seeds `/en` and `/fr` (one per locale), so nothing is ever
+      // written for `/` itself and the site root 404s on a static host. This
+      // renders i18n's own root redirect to the default locale.
+      routes: ['/'],
+    },
+  },
+  // Keeps <NuxtLink> hrefs (including the ones i18n's switchLocalePath builds
+  // for hreflang) ending in a slash, matching `site.trailingSlash` and the
+  // directory-style files written by `autoSubfolderIndex` above.
   experimental: {
     defaults: {
       nuxtLink: {
