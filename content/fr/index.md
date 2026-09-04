@@ -1,6 +1,8 @@
 ---
 title: Accueil
 description: Documentation homelab par Djeex — guides d'auto-hébergement pour Debian, Docker, réseau, stockage et bien plus.
+seo:
+  ogImage: /img/social.png
 ---
 
 :ellipsis{right=0px width=75% blur=150px zIndex=60}
