@@ -84,10 +84,12 @@ export default defineNuxtConfig({
       // path to its slash form. Back to `path/index.html` so what's on disk
       // matches the URLs we advertise.
       autoSubfolderIndex: true,
-      // Docus only seeds `/en` and `/fr` (one per locale), so nothing is ever
-      // written for `/` itself and the site root 404s on a static host. This
-      // renders i18n's own root redirect to the default locale.
-      routes: ['/'],
+      // Docus only seeds `/en` and `/fr` (one per locale), so neither `/` nor
+      // `/robots.txt` is ever written and both 404 on a static host — `/` loses
+      // the redirect to the default locale, and robots.txt loses the `Sitemap:`
+      // line pointing crawlers at sitemap.xml. Both routes exist server-side,
+      // they just need to be prerendered.
+      routes: ['/', '/robots.txt'],
     },
   },
   // Keeps <NuxtLink> hrefs (including the ones i18n's switchLocalePath builds
