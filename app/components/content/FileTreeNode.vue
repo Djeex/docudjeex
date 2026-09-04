@@ -14,9 +14,6 @@ const props = withDefaults(defineProps<{
   isLast: false,
 })
 
-// Splits a trailing " # comment" off a raw label (space-prefixed, like a
-// real code comment), so authors can annotate a tree entry the same way
-// they'd annotate a line of code.
 function splitComment(raw: string) {
   const index = raw.indexOf(' #')
   if (index === -1) return { text: raw, comment: undefined as string | undefined }
