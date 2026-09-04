@@ -5,7 +5,7 @@
 [![Uptime-Kuma](https://stats.djeex.fr/api/badge/23/status?style=for-the-badge)](https://docu.djeex.fr/)
 </p>
 
-# 🔧 Docs, more docs
+# 🔧 Homelab docs & other dumb things
 
 **Docu·djeex** is first and foremost a personal project aimed at self-hosting as many everyday services as possible, without relying on proprietary platforms (Google, Apple, Netflix, etc.).
 This documentation site is built using [Nuxt.js](https://nuxt.com/), on the [Docus](https://docus.dev) theme (Nuxt UI + Nuxt Content).
