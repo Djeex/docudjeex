@@ -64,6 +64,11 @@ export default defineAppConfig({
         'directory tree': 'i-lucide-folder-tree',
         'ini': 'i-lucide-settings',
         'conf': 'i-lucide-settings',
+        'service': 'i-lucide-settings',
+        // Used as ::code-group tab labels when a command differs per OS.
+        'macos': 'i-simple-icons-apple',
+        'linux': 'i-simple-icons-linux',
+        'windows': 'i-simple-icons-windows',
       },
       pre: {
         slots: {

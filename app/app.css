@@ -26,3 +26,12 @@
   }
 }
 
+/* A screenshot inside a list item (the step-by-step install guides) is
+   rendered as a bare <img> child of the <li> and gets no margin at all, so it
+   ends up glued to the text above and below it. The same image in a paragraph
+   is wrapped in a <p> that carries the prose spacing. Give it that spacing
+   back so illustrated steps stay readable. */
+li > img {
+  margin-block: 1.25rem;
+}
+
