@@ -25,7 +25,7 @@ seo:
 ---
 color: primary
 size: xl
-to: /en/about/welcome
+to: /about/welcome/
 ---
 Access the Docs
 ::::::
@@ -35,9 +35,9 @@ Access the Docs
 color: neutral
 variant: outline
 size: xl
-to: https://docu.djeex.fr/fr/
+to: /serveex/introduction/
 ---
-🇫🇷 →
+Set up my homelab →
 ::::::
 :::::
 ::::

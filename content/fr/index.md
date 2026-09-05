@@ -1,6 +1,6 @@
 ---
 title: Accueil
-description: Documentation homelab par Djeex — guides d'auto-hébergement pour Debian, Docker, réseau, stockage et bien plus.
+description: Documentation homelab par Djeex, guides d'auto-hébergement pour Debian, Docker, réseau, stockage et bien plus.
 seo:
   ogImage: /img/social.png
 ---
@@ -35,9 +35,9 @@ Accéder à la doc
 color: neutral
 variant: outline
 size: xl
-to: https://docu.djeex.fr/en/
+to: /serveex/introduction/
 ---
-🇬🇧 →
+Démarrer mon homelab →
 ::::::
 :::::
 ::::
