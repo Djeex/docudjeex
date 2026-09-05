@@ -34,7 +34,7 @@ export default defineNuxtConfig({
     // actual callout. Marking this folder global forces them into the
     // bundle regardless. `nuxt dev` never hits this: it serves components
     // on demand and doesn't tree-shake.
-    { path: '~/app/components/prose', pathPrefix: false, global: true },
+    { path: '~/components/prose', pathPrefix: false, global: true },
   ],
   modules: ['@nuxtjs/i18n'],
   site: {
