@@ -24,6 +24,18 @@ function getContributors(absoluteFilePath: string): string[] {
 
 export default defineNuxtConfig({
   extends: ['docus'],
+  components: [
+    // ProseNote/Tip/Warning/Caution are only ever resolved dynamically, by
+    // name, from Nuxt Content's MDC tag map (`note` -> `ProseNote`, etc.).
+    // Nothing statically imports or writes `<ProseNote>` in a template, so
+    // Vite's production build can't see them as used and tree-shakes them
+    // out of both the client and server bundles entirely: every admonition
+    // then renders as a raw, unstyled `<ProseNote>` tag instead of the
+    // actual callout. Marking this folder global forces them into the
+    // bundle regardless. `nuxt dev` never hits this: it serves components
+    // on demand and doesn't tree-shake.
+    { path: '~/app/components/prose', pathPrefix: false, global: true },
+  ],
   modules: ['@nuxtjs/i18n'],
   site: {
     url: 'https://docu.djeex.fr',
