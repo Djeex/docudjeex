@@ -60,6 +60,15 @@ export default defineNuxtConfig({
         dir: resolve('./app/assets/brand-icons'),
       },
     ],
+    // app.config.ts's codeIcon map resolves simple-icons/lucide names
+    // dynamically (not as a literal `i-xxx` string anywhere), so Nuxt
+    // Icon's static scanner can't pick them up for the local bundle.
+    // Without this, they fall back to a live api.iconify.design request
+    // at prerender time, which times out wherever outbound access is
+    // restricted. Bundling both collections in full avoids that fallback.
+    serverBundle: {
+      collections: ['simple-icons', 'lucide'],
+    },
   },
   content: {
     build: {
