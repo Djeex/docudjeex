@@ -22,12 +22,6 @@ function getContributors(absoluteFilePath: string): string[] {
   }
 }
 
-// @nuxt/image resolves its file-storage root differently in `nuxi dev`
-// (needs an absolute path) vs a production build (needs the plain
-// `public/` string — an absolute path there breaks the SVG content-type
-// on the compiled `/_ipx` route). Branch on the actual nuxi subcommand.
-const isDev = process.argv.includes('dev')
-
 export default defineNuxtConfig({
   extends: ['docus'],
   modules: ['@nuxtjs/i18n'],
@@ -53,7 +47,11 @@ export default defineNuxtConfig({
     },
   },
   image: {
-    dir: isDev ? fileURLToPath(new URL('./public', import.meta.url)) : 'public/',
+    // Must be absolute: a plain 'public/' string resolves against whatever
+    // the IPX handler's cwd happens to be at request time, which isn't
+    // reliably the project root during a production prerender crawl.
+    // Every single /_ipx/* request 404s (IPX_FILE_NOT_FOUND) otherwise.
+    dir: fileURLToPath(new URL('./public', import.meta.url)),
   },
   icon: {
     customCollections: [
