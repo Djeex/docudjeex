@@ -91,14 +91,12 @@ export default defineNuxtConfig({
       // path to its slash form. Back to `path/index.html` so what's on disk
       // matches the URLs we advertise.
       autoSubfolderIndex: true,
-      // Docus only seeds `/en` and `/fr` (one per locale), so `/robots.txt`
-      // is never written and 404s on its own, losing the `Sitemap:` line
-      // crawlers need to find sitemap.xml. It exists server-side, it just
-      // needs to be prerendered. `/` is deliberately NOT listed here: it
-      // redirects to `/en/` (see routeRules below with `prerender: false`),
-      // and prerendering a redirect bakes it as a client-side meta-refresh
-      // stub with no SEO tags instead of a real 301.
-      routes: ['/robots.txt'],
+      // Docus only seeds `/en` and `/fr` (one per locale), so neither `/` nor
+      // `/robots.txt` is ever written and both 404 on a static host — `/` loses
+      // the redirect to the default locale, and robots.txt loses the `Sitemap:`
+      // line pointing crawlers at sitemap.xml. Both routes exist server-side,
+      // they just need to be prerendered.
+      routes: ['/', '/robots.txt'],
     },
   },
   // Keeps <NuxtLink> hrefs (including the ones i18n's switchLocalePath builds
@@ -137,13 +135,6 @@ export default defineNuxtConfig({
   // and friends, where the words are the same in both languages) are absent on
   // purpose: a rule there would redirect the page to itself.
   routeRules: {
-    // Without this, `/` is a prerendered stub containing only a client-side
-    // `<meta http-equiv="refresh">` to `/en` (nuxt/i18n's static fallback
-    // for a locale redirect with no server request to inspect at prerender
-    // time). Crawlers and OG-preview tools don't execute that refresh, so
-    // they read the stub's empty head and find no title, description, or
-    // og:image. A real 301 fixes that: they land on `/en/` directly.
-    '/': { redirect: { to: '/en/', statusCode: 301 }, prerender: false },
     // English, previously served at the site root.
     '/about/welcome': { redirect: { to: '/en/about/welcome/', statusCode: 301 } },
     '/general/networking/nat': { redirect: { to: '/en/general/networking/nat/', statusCode: 301 } },
