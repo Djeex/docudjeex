@@ -25,6 +25,11 @@ function getContributors(absoluteFilePath: string): string[] {
 export default defineNuxtConfig({
   extends: ['docus'],
   components: [
+    // Passing an array here replaces Nuxt's default `~/components` scan
+    // instead of adding to it, so every local override under app/components/
+    // (AppHeaderCenter, AppHeaderBottom, DocsAsideLeftTop, etc.) was silently
+    // ignored in favor of the docus layer's originals. Keep the default scan.
+    '~/components',
     // ProseNote/Tip/Warning/Caution are only ever resolved dynamically, by
     // name, from Nuxt Content's MDC tag map (`note` -> `ProseNote`, etc.).
     // Nothing statically imports or writes `<ProseNote>` in a template, so
