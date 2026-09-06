@@ -1,0 +1,27 @@
+name: Trigger container build
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/**'
+      - 'app/**'
+      - 'public/**'
+      - 'server/**'
+      - 'nuxt.config.ts'
+      - 'content.config.ts'
+      - 'tsconfig.json'
+      - 'package.json'
+      - 'package-lock.json'
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch docudjeex-build
+        run: |
+          curl -sf -X POST \
+            -H "Authorization: token ${{ secrets.BUILD_REPO_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d "{\"ref\":\"main\",\"inputs\":{\"source_sha\":\"${{ github.sha }}\"}}" \
+            "https://git.djeex.fr/api/v1/repos/Djeex/docudjeex-build/actions/workflows/build.yml/dispatches"
