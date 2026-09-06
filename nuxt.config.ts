@@ -78,13 +78,14 @@ export default defineNuxtConfig({
       },
     ],
     // app.config.ts's codeIcon map resolves simple-icons/lucide names
-    // dynamically (not as a literal `i-xxx` string anywhere), so Nuxt
-    // Icon's static scanner can't pick them up for the local bundle.
-    // Without this, they fall back to a live api.iconify.design request
-    // at prerender time, which times out wherever outbound access is
-    // restricted. Bundling both collections in full avoids that fallback.
+    // dynamically (not as a literal `i-xxx` string anywhere), and
+    // FileTreeNode.vue resolves vscode-icons file-type icons the same way,
+    // so Nuxt Icon's static scanner can't pick any of them up for the local
+    // bundle. Without this, they fall back to a live api.iconify.design
+    // request at prerender time, which times out wherever outbound access
+    // is restricted. Bundling all three collections in full avoids that.
     serverBundle: {
-      collections: ['simple-icons', 'lucide'],
+      collections: ['simple-icons', 'lucide', 'vscode-icons'],
     },
   },
   content: {
