@@ -138,7 +138,7 @@ addPrerenderPath(`/raw${route.path}.md`)
 
       <USeparator v-if="giteaUrl || github">
         <div
-          class="flex items-center gap-2 text-sm text-muted"
+          class="flex items-center gap-2 text-sm text-muted max-[420px]:flex-col"
         >
           <UButton
             v-if="editLink"
