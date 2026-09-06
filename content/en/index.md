@@ -7,7 +7,7 @@ seo:
 
 :ellipsis{right=0px width=75% blur=150px zIndex=60}
 
-::u-container{class="min-h-[calc(100vh-var(--ui-header-height))] flex flex-col pt-32 pb-32"}
+::u-container{class="min-h-[calc(100vh-var(--ui-header-height))] flex flex-col pt-32 pb-32 max-md:pt-[60px] max-md:pb-[60px]"}
 :::div{class="grid lg:grid-cols-3 gap-8 items-stretch flex-1"}
 ::::div{class="lg:col-span-2 flex flex-col justify-between"}
 :::::div{class="flex flex-col gap-8"}
@@ -16,11 +16,11 @@ seo:
 <p class="text-lg my-0!">Docs, more docs. Tips and experiments. Build your homelab and your own NAS.</p>
 :::::
 
-:::::div{class="my-6"}
+:::::div{class="my-6 pt-[25px] pb-[25px]"}
 ![](/img/global/docudjeex-home.svg){.w-full}
 :::::
 
-:::::div{class="flex items-center gap-3"}
+:::::div{class="flex flex-col sm:flex-row sm:items-center gap-3"}
 ::::::u-button{class="text-white font-bold"}
 ---
 color: primary
