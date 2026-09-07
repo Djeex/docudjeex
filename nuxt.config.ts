@@ -137,12 +137,17 @@ export default defineNuxtConfig({
     // files, no Nitro server at runtime), so the `/api/_nuxt_icon` route
     // Nuxt Icon's client falls back to for anything not in clientBundle
     // doesn't exist in production: that fallback goes straight to the live
-    // Iconify API instead, which the CSP's connect-src blocks. `provider:
-    // 'none'` plus `fallbackToApi: false` removes that live-API fallback
-    // path entirely (both server- and client-side) rather than relying on
-    // clientBundle/serverBundle being perfectly exhaustive to avoid ever
-    // triggering it, per Nuxt Icon's own recommended static-site config.
-    provider: 'none',
+    // Iconify API instead, which the CSP's connect-src blocks.
+    // `provider: 'none'` looked like the right fix (it's Nuxt Icon's own
+    // documented recommendation for static sites) but it turned out to
+    // disable dynamic icon resolution altogether, including the local
+    // serverBundle lookup during prerendering itself, not just the live-API
+    // fallback: every vscode-icons file-type icon (resolved dynamically by
+    // extension, not as a literal string) started failing to load with a
+    // build-time warning instead of rendering from the bundle like before.
+    // `fallbackToApi: false` alone gets the one thing that actually
+    // matters, no code path is left that can ever reach the live API,
+    // without taking the local resolution mechanism down with it.
     fallbackToApi: false,
     customCollections: [
       {
@@ -154,9 +159,9 @@ export default defineNuxtConfig({
     // dynamically (not as a literal `i-xxx` string anywhere), and
     // FileTreeNode.vue resolves vscode-icons file-type icons the same way,
     // so Nuxt Icon's static scanner can't pick any of them up for the local
-    // bundle. Without this, they'd need the live-API fallback above just
-    // disabled, which is now blocked instead of avoided. Bundling all
-    // three collections in full sidesteps that.
+    // bundle. Without this, they'd hit the now-disabled live-API fallback
+    // above during prerender and log a build warning instead of rendering.
+    // Bundling all three collections in full sidesteps that.
     // Everything else used as a literal icon in content/*.md or
     // .navigation.yml is added by scanContentIcons() above, so a new
     // collection introduced in an article gets bundled automatically
@@ -165,20 +170,18 @@ export default defineNuxtConfig({
       collections: [...new Set(['simple-icons', 'lucide', 'vscode-icons', ...contentIcons.collections])],
     },
     // The codeIcon values above, forced into the content-hashed client
-    // bundle instead of relying on the (now-disabled) runtime route: that
-    // route's URL doesn't change between builds, so a browser or CDN
-    // caching an old (or, before the serverBundle fix above, broken)
-    // response for it kept serving that stale result until the cache
-    // expired or was purged, which is what "icon disappears until a hard
-    // refresh" actually was. `scan: true` catches any other icon used
-    // literally in .vue/.ts source; scanContentIcons() above covers content
-    // the same way it does for serverBundle. vscode-icons' per-file-
-    // extension icons aren't listed here: there are too many to enumerate
-    // and new file types keep appearing in content, so with the API
-    // fallback disabled, an unbundled one now renders as a missing icon
-    // instead of a broken network request; still preferable to a CSP
-    // violation, and serverBundle above still renders it correctly in the
-    // page's own initial prerendered HTML.
+    // bundle instead of relying on the runtime route: that route's URL
+    // doesn't change between builds, so a browser or CDN caching an old (or,
+    // before the serverBundle fix above, broken) response for it kept
+    // serving that stale result until the cache expired or was purged,
+    // which is what "icon disappears until a hard refresh" actually was.
+    // `scan: true` catches any other icon used literally in .vue/.ts
+    // source; scanContentIcons() above covers content the same way it does
+    // for serverBundle. vscode-icons' per-file-extension icons aren't
+    // listed here: there are too many to enumerate and new file types keep
+    // appearing in content, so an unbundled one falls back to the runtime
+    // route client-side, same as before this whole fix, just no longer for
+    // every collection used in content.
     clientBundle: {
       scan: true,
       icons: [...new Set([
