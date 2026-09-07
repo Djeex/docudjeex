@@ -17,7 +17,7 @@ seo:
 :::::
 
 :::::div{class="my-6 pt-[25px] pb-[25px]"}
-![](/img/global/docudjeex-home.svg){.w-full}
+![Illustration de la page d'accueil de Docudjeex](/img/global/docudjeex-home.svg){.w-full}
 :::::
 
 :::::div{class="flex flex-col sm:flex-row sm:items-center gap-3"}
