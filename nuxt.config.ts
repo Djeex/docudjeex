@@ -87,6 +87,25 @@ export default defineNuxtConfig({
     serverBundle: {
       collections: ['simple-icons', 'lucide', 'vscode-icons'],
     },
+    // The fixed, small set of codeIcon values above. Forces them into the
+    // content-hashed client bundle instead of Nuxt Icon's runtime
+    // /api/_nuxt_icon route: that route's URL doesn't change between
+    // builds, so a browser or CDN caching an old (or, before the
+    // serverBundle fix above, broken) response for it keeps serving that
+    // stale result until the cache expires or is purged, which is what
+    // "icon disappears until a hard refresh" actually was. vscode-icons'
+    // per-file-extension icons aren't listed here: there are too many to
+    // enumerate and new file types keep appearing in content, so they
+    // still rely on the runtime route plus cache purging on deploy.
+    clientBundle: {
+      icons: [
+        'lucide:folder-tree',
+        'lucide:settings',
+        'simple-icons:apple',
+        'simple-icons:linux',
+        'simple-icons:windows',
+      ],
+    },
   },
   content: {
     build: {
