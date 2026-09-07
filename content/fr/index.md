@@ -25,7 +25,7 @@ seo:
 ---
 color: primary
 size: xl
-to: /fr/about/welcome
+to: /about/welcome/
 ---
 Accéder à la doc
 ::::::
