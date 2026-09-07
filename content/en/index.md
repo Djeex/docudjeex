@@ -43,7 +43,7 @@ Set up my homelab →
 ::::
 
 ::::div{class="flex flex-col gap-5 justify-start self-start"}
-<h2 class="text-sm font-semibold text-muted uppercase tracking-wide mt-0 mb-0">And Other dumb things</h2>
+<h2 class="text-sm font-semibold text-muted uppercase tracking-wide mt-0 mb-0">And other dumb things</h2>
 
 :::::card
 ---
