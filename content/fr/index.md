@@ -25,7 +25,7 @@ seo:
 ---
 color: primary
 size: xl
-to: /fr/about/welcome
+to: /about/welcome/
 ---
 Accéder à la doc
 ::::::
@@ -55,7 +55,7 @@ class: my-0!
 ui:
   icon: text-[#1ad6ff]
 ---
-Jetez un oeil à mes âneries
+Jetez un œil à mes âneries
 :::::
 
 :::::card
