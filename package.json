@@ -6,6 +6,13 @@
     "build": "NUXT_SITE_URL=https://docu.djeex.fr nuxt build"
   },
   "dependencies": {
+    "@iconify-json/carbon": "^1.2.26",
+    "@iconify-json/cbi": "^1.2.59",
+    "@iconify-json/cib": "^1.2.3",
+    "@iconify-json/fluent-color": "^1.2.21",
+    "@iconify-json/logos": "^1.2.14",
+    "@iconify-json/noto": "^1.2.7",
+    "@iconify-json/solar": "^1.2.10",
     "@nuxtjs/i18n": "^10.6.0",
     "better-sqlite3": "^12.11.1",
     "docus": "^5.13.0",

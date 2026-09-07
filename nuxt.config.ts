@@ -1,8 +1,55 @@
 import { fileURLToPath } from 'node:url'
 import { execFileSync } from 'node:child_process'
+import { readdirSync, readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { createResolver } from '@nuxt/kit'
 
 const { resolve } = createResolver(import.meta.url)
+
+// Every `i-<collection>-<name>` icon referenced from content/*.md needs its
+// collection listed below, but Nuxt Icon's own static scanner only looks at
+// .vue/.ts source, not markdown content, so it can't find these on its own.
+// Scanning content here instead of hand-maintaining the list means a new
+// icon collection used in an article gets bundled automatically on the next
+// build; the only manual step left is `npm install @iconify-json/<name>`
+// for a genuinely new collection, and a missing one now fails the build
+// loudly (unresolved import) instead of silently breaking at runtime behind
+// the CSP (icons falling back to a live, blocked api.iconify.design call).
+function scanContentIconCollections(): string[] {
+  // Collection prefixes can contain hyphens themselves (simple-icons,
+  // fluent-color), same as the separator before the icon name, so a plain
+  // "first segment" split is ambiguous. Matching against the actual
+  // installed @iconify-json package names, longest first, resolves it.
+  const installed = readdirSync(resolve('./node_modules/@iconify-json'))
+    .sort((a, b) => b.length - a.length)
+  const found = new Set<string>()
+  const pattern = /icon=["']i-([a-z0-9-]+)["']|icon:\s*["']?i-([a-z0-9-]+)/g
+  function walk(dir: string) {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const full = join(dir, entry.name)
+      if (entry.isDirectory()) {
+        walk(full)
+      }
+      else if (entry.name.endsWith('.md')) {
+        const text = readFileSync(full, 'utf8')
+        for (const match of text.matchAll(pattern)) {
+          const iconRef = match[1] ?? match[2]
+          const collection = installed.find(name => iconRef === name || iconRef.startsWith(`${name}-`))
+          // Falls back to the first segment for a collection that isn't
+          // installed yet: still wrong, but it now surfaces as a clear
+          // "cannot resolve @iconify-json/<name>" build error to fix,
+          // rather than a silent runtime CSP block.
+          found.add(collection ?? iconRef.split('-')[0])
+        }
+      }
+    }
+  }
+  walk(resolve('./content'))
+  // 'brand' is the local customCollections prefix (app/assets/brand-icons),
+  // not an installable Iconify package.
+  found.delete('brand')
+  return [...found]
+}
 
 // Contributors per page: read straight from git history rather than an
 // API, so it needs no token and no network call, but the CI checkout must
@@ -84,8 +131,12 @@ export default defineNuxtConfig({
     // bundle. Without this, they fall back to a live api.iconify.design
     // request at prerender time, which times out wherever outbound access
     // is restricted. Bundling all three collections in full avoids that.
+    // Everything else used as a literal icon in content/*.md is added by
+    // scanContentIconCollections() above, so a new collection introduced in
+    // an article gets bundled automatically instead of needing a manual
+    // addition here.
     serverBundle: {
-      collections: ['simple-icons', 'lucide', 'vscode-icons'],
+      collections: [...new Set(['simple-icons', 'lucide', 'vscode-icons', ...scanContentIconCollections()])],
     },
     // The fixed, small set of codeIcon values above. Forces them into the
     // content-hashed client bundle instead of Nuxt Icon's runtime
