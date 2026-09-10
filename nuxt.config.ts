@@ -66,6 +66,31 @@ function scanContentIcons(): { collections: string[], icons: string[] } {
 }
 const contentIcons = scanContentIcons()
 
+// None of the top-level content sections has a landing page of its own,
+// just a first numbered article inside the folder, so the bare section URL
+// (/en/serveex/) has nothing to serve on the static build. Deriving the
+// redirect target from the content tree here, instead of hand-listing each
+// section, means adding, renaming or reordering a section's first article
+// keeps working on its own, with nothing to update in this file or in
+// SWAG's config.
+function getSectionIndexRedirects(): Record<string, { redirect: { to: string, statusCode: 301 } }> {
+  const rules: Record<string, { redirect: { to: string, statusCode: 301 } }> = {}
+  for (const lang of ['en', 'fr']) {
+    const langDir = resolve(`./content/${lang}`)
+    for (const section of readdirSync(langDir, { withFileTypes: true })) {
+      if (!section.isDirectory()) continue
+      const sectionSlug = section.name.replace(/^\d+\./, '')
+      const firstFile = readdirSync(join(langDir, section.name), { withFileTypes: true })
+        .filter(entry => entry.isFile() && entry.name.endsWith('.md'))
+        .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }))[0]
+      if (!firstFile) continue
+      const fileSlug = firstFile.name.replace(/^\d+\./, '').replace(/\.md$/, '')
+      rules[`/${lang}/${sectionSlug}/`] = { redirect: { to: `/${lang}/${sectionSlug}/${fileSlug}/`, statusCode: 301 } }
+    }
+  }
+  return rules
+}
+
 // Contributors per page: read straight from git history rather than an
 // API, so it needs no token and no network call, but the CI checkout must
 // fetch full history (not a shallow clone) or every file will only show
@@ -219,8 +244,10 @@ export default defineNuxtConfig({
       // `/robots.txt` is ever written and both 404 on a static host — `/` loses
       // the redirect to the default locale, and robots.txt loses the `Sitemap:`
       // line pointing crawlers at sitemap.xml. Both routes exist server-side,
-      // they just need to be prerendered.
-      routes: ['/', '/robots.txt'],
+      // they just need to be prerendered. `/404.html` doesn't match any real
+      // route either, so crawling it renders Docus's own error page, which
+      // nginx then serves for every actual 404 instead of its bare default.
+      routes: ['/', '/robots.txt', '/404.html'],
     },
   },
   // Keeps <NuxtLink> hrefs (including the ones i18n's switchLocalePath builds
@@ -259,6 +286,8 @@ export default defineNuxtConfig({
   // and friends, where the words are the same in both languages) are absent on
   // purpose: a rule there would redirect the page to itself.
   routeRules: {
+    ...getSectionIndexRedirects(),
+
     // English, previously served at the site root.
     '/about/welcome': { redirect: { to: '/en/about/welcome/', statusCode: 301 } },
     '/general/networking/nat': { redirect: { to: '/en/general/networking/nat/', statusCode: 301 } },
