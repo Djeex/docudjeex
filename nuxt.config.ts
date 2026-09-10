@@ -1,8 +1,9 @@
 import { fileURLToPath } from 'node:url'
 import { execFileSync } from 'node:child_process'
 import { readdirSync, readFileSync } from 'node:fs'
-import { join } from 'node:path'
+import { extname, join } from 'node:path'
 import { createResolver } from '@nuxt/kit'
+import { imageSize } from 'image-size'
 
 const { resolve } = createResolver(import.meta.url)
 
@@ -65,6 +66,34 @@ function scanContentIcons(): { collections: string[], icons: string[] } {
   }
 }
 const contentIcons = scanContentIcons()
+
+// ProseImg (app/components/content/ProseImg.vue) caps every markdown image
+// at 1280px wide, but NuxtImg's `width` prop always becomes the rendered
+// <img>'s HTML width attribute too, not just the resize target. Passing
+// 1280 unconditionally would force a smaller source (a 1024px screenshot,
+// say) to stretch up to fill that width in the browser, blurry on every
+// display. Reading each image's real width here once at build time lets
+// ProseImg pass through `min(natural, 1280)` instead, so undersized images
+// are only re-encoded, never stretched.
+function scanImageWidths(): Record<string, number> {
+  const widths: Record<string, number> = {}
+  const raster = new Set(['.png', '.jpg', '.jpeg', '.webp'])
+  function walk(dir: string) {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const full = join(dir, entry.name)
+      if (entry.isDirectory()) {
+        walk(full)
+      }
+      else if (raster.has(extname(entry.name).toLowerCase())) {
+        const { width } = imageSize(readFileSync(full))
+        const publicPath = full.slice(full.indexOf('/public/') + '/public'.length)
+        widths[publicPath] = width
+      }
+    }
+  }
+  walk(resolve('./public/img'))
+  return widths
+}
 
 // None of the top-level content sections has a landing page of its own,
 // just a first numbered article inside the folder, so the bare section URL
@@ -156,6 +185,13 @@ export default defineNuxtConfig({
     // reliably the project root during a production prerender crawl.
     // Every single /_ipx/* request 404s (IPX_FILE_NOT_FOUND) otherwise.
     dir: fileURLToPath(new URL('./public', import.meta.url)),
+  },
+  runtimeConfig: {
+    public: {
+      // Read by ProseImg to cap each image's width at its own real size
+      // instead of always requesting (and rendering) 1280px.
+      imageWidths: scanImageWidths(),
+    },
   },
   icon: {
     // This site builds to a fully static export (nginx serving prerendered
